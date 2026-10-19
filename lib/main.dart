@@ -12,6 +12,13 @@ import 'package:japanese_interval_walking_timer/services/walking_timer_controlle
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Debug override of the UI/speech language, e.g.
+/// `flutter run --dart-define=LOCALE=en`. Empty means follow the OS.
+const String _localeOverride = String.fromEnvironment('LOCALE');
+
+Locale? get _forcedLocale =>
+    _localeOverride.isEmpty ? null : Locale(_localeOverride);
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
@@ -44,7 +51,9 @@ class _MyAppState extends State<MyApp> {
   late final WalkingTimerController _timer = WalkingTimerController(
     announcer: widget.announcer,
     settings: widget.settings,
-    languageCode: () => ui.PlatformDispatcher.instance.locale.languageCode,
+    languageCode: () =>
+        _forcedLocale?.languageCode ??
+        ui.PlatformDispatcher.instance.locale.languageCode,
   );
 
   @override
@@ -80,6 +89,7 @@ class _MyAppState extends State<MyApp> {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
+            locale: _forcedLocale,
             supportedLocales: AppLocalizations.supportedLocales,
             home: HomeScreen(backgroundService: widget.backgroundService),
           ),

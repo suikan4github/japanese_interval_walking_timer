@@ -179,7 +179,7 @@ abstract class AppLocalizations {
   /// No description provided for @speechFinished.
   ///
   /// In en, this message translates to:
-  /// **'That\'s all. Have a good day.'**
+  /// **'We did it! Have a good day.'**
   String get speechFinished;
 
   /// No description provided for @settingsColorScheme.

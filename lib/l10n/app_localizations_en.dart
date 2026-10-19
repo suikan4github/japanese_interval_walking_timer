@@ -52,7 +52,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get speechFastWalk => 'Please walk briskly.';
 
   @override
-  String get speechFinished => 'That\'s all. Have a good day.';
+  String get speechFinished => 'We did it! Have a good day.';
 
   @override
   String get settingsColorScheme => 'Color scheme';
