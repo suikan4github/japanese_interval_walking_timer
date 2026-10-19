@@ -16,19 +16,28 @@
       "total": {"type": "int"}
     }
   },
-  "speechLapStart": "Lap {lap}. Please walk slowly.",
-  "@speechLapStart": {
+  "speechLap": "Lap {lap}.",
+  "speechSlowWalk": "Please walk slowly.",
+  "@speechLap": {
     "placeholders": {
       "lap": {"type": "int"}
     }
   },
   "speechFastWalk": "Please walk briskly.",
-  "speechFinished": "All laps are complete. Well done.",
+  "speechFinished": "That's all. Have a good day.",
   "settingsColorScheme": "Color scheme",
   "settingsSchemeSystem": "Follow system",
   "settingsSchemeCustom": "Custom",
   "settingsSeedColor": "Theme color",
+  "settingsColorVariant": "Color variation",
+  "settingsVariantFidelity": "Vivid",
+  "settingsVariantTonal": "Tonal",
+  "settingsVariantNeutral": "Neutral",
+  "settingsVariantMonochrome": "Monochrome",
   "settingsSelectColor": "Select color",
+  "settingsLaps": "Number of laps",
+  "settingsHalfTime": "Duration of each half",
+  "settingsLocked": "Cannot be changed while the timer is active",
   "settingsVolume": "Voice volume",
   "walkingSlow": "Walking slowly",
   "walkingFast": "Walking briskly",

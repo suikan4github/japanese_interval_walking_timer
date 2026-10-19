@@ -41,15 +41,18 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String speechLapStart(int lap) {
-    return '第$lapラップです。ゆっくり歩いてください';
+  String speechLap(int lap) {
+    return '第$lapラップです。';
   }
+
+  @override
+  String get speechSlowWalk => 'ゆっくり歩いてください';
 
   @override
   String get speechFastWalk => '早足で歩いてください';
 
   @override
-  String get speechFinished => 'すべてのラップが終了しました。お疲れさまでした';
+  String get speechFinished => 'これで終了です。お疲れ様でした。';
 
   @override
   String get settingsColorScheme => '配色';
@@ -64,7 +67,31 @@ class AppLocalizationsJa extends AppLocalizations {
   String get settingsSeedColor => 'テーマカラー';
 
   @override
+  String get settingsColorVariant => 'カラーバリエーション';
+
+  @override
+  String get settingsVariantFidelity => '充実';
+
+  @override
+  String get settingsVariantTonal => 'トーン';
+
+  @override
+  String get settingsVariantNeutral => 'ニュートラル';
+
+  @override
+  String get settingsVariantMonochrome => 'モノクロ';
+
+  @override
   String get settingsSelectColor => '色を選択';
+
+  @override
+  String get settingsLaps => 'ラップ数';
+
+  @override
+  String get settingsHalfTime => '前半・後半それぞれの時間';
+
+  @override
+  String get settingsLocked => 'タイマーの動作中は変更できません';
 
   @override
   String get settingsVolume => '音声の音量';

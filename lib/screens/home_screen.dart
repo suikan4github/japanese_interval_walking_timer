@@ -36,10 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (!mounted) return;
     final l10n = AppLocalizations.of(context)!;
     final status = _controller.status;
-    final text = l10n.notificationText(
-      _controller.lap,
-      WalkingTimerController.totalLaps,
-    );
+    final text = l10n.notificationText(_controller.lap, _controller.totalLaps);
     if (status == TimerStatus.running && _lastStatus != TimerStatus.running) {
       widget.backgroundService.start(l10n.notificationTitle, text);
     } else if (status == TimerStatus.running && _lastLap != _controller.lap) {
@@ -110,9 +107,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       key: const Key('lapProgress'),
                       value: timer.progress,
                       strokeWidth: 14,
+                      // Distinct from the screen background under any scheme,
+                      // including system (wallpaper) colors.
                       backgroundColor: Theme.of(
                         context,
-                      ).colorScheme.surfaceContainerHighest,
+                      ).colorScheme.primaryContainer,
                     ),
                   ),
                   Column(
@@ -129,10 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             : l10n.walkingSlow,
                       ),
                       Text(
-                        l10n.lapProgress(
-                          timer.lap,
-                          WalkingTimerController.totalLaps,
-                        ),
+                        l10n.lapProgress(timer.lap, timer.totalLaps),
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
                     ],

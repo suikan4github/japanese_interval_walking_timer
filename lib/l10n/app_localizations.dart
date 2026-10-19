@@ -158,11 +158,17 @@ abstract class AppLocalizations {
   /// **'{lap}/{total}'**
   String lapProgress(int lap, int total);
 
-  /// No description provided for @speechLapStart.
+  /// No description provided for @speechLap.
   ///
   /// In en, this message translates to:
-  /// **'Lap {lap}. Please walk slowly.'**
-  String speechLapStart(int lap);
+  /// **'Lap {lap}.'**
+  String speechLap(int lap);
+
+  /// No description provided for @speechSlowWalk.
+  ///
+  /// In en, this message translates to:
+  /// **'Please walk slowly.'**
+  String get speechSlowWalk;
 
   /// No description provided for @speechFastWalk.
   ///
@@ -173,7 +179,7 @@ abstract class AppLocalizations {
   /// No description provided for @speechFinished.
   ///
   /// In en, this message translates to:
-  /// **'All laps are complete. Well done.'**
+  /// **'That\'s all. Have a good day.'**
   String get speechFinished;
 
   /// No description provided for @settingsColorScheme.
@@ -200,11 +206,59 @@ abstract class AppLocalizations {
   /// **'Theme color'**
   String get settingsSeedColor;
 
+  /// No description provided for @settingsColorVariant.
+  ///
+  /// In en, this message translates to:
+  /// **'Color variation'**
+  String get settingsColorVariant;
+
+  /// No description provided for @settingsVariantFidelity.
+  ///
+  /// In en, this message translates to:
+  /// **'Vivid'**
+  String get settingsVariantFidelity;
+
+  /// No description provided for @settingsVariantTonal.
+  ///
+  /// In en, this message translates to:
+  /// **'Tonal'**
+  String get settingsVariantTonal;
+
+  /// No description provided for @settingsVariantNeutral.
+  ///
+  /// In en, this message translates to:
+  /// **'Neutral'**
+  String get settingsVariantNeutral;
+
+  /// No description provided for @settingsVariantMonochrome.
+  ///
+  /// In en, this message translates to:
+  /// **'Monochrome'**
+  String get settingsVariantMonochrome;
+
   /// No description provided for @settingsSelectColor.
   ///
   /// In en, this message translates to:
   /// **'Select color'**
   String get settingsSelectColor;
+
+  /// No description provided for @settingsLaps.
+  ///
+  /// In en, this message translates to:
+  /// **'Number of laps'**
+  String get settingsLaps;
+
+  /// No description provided for @settingsHalfTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration of each half'**
+  String get settingsHalfTime;
+
+  /// No description provided for @settingsLocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot be changed while the timer is active'**
+  String get settingsLocked;
 
   /// No description provided for @settingsVolume.
   ///

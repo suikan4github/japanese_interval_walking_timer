@@ -41,15 +41,18 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String speechLapStart(int lap) {
-    return 'Lap $lap. Please walk slowly.';
+  String speechLap(int lap) {
+    return 'Lap $lap.';
   }
+
+  @override
+  String get speechSlowWalk => 'Please walk slowly.';
 
   @override
   String get speechFastWalk => 'Please walk briskly.';
 
   @override
-  String get speechFinished => 'All laps are complete. Well done.';
+  String get speechFinished => 'That\'s all. Have a good day.';
 
   @override
   String get settingsColorScheme => 'Color scheme';
@@ -64,7 +67,31 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsSeedColor => 'Theme color';
 
   @override
+  String get settingsColorVariant => 'Color variation';
+
+  @override
+  String get settingsVariantFidelity => 'Vivid';
+
+  @override
+  String get settingsVariantTonal => 'Tonal';
+
+  @override
+  String get settingsVariantNeutral => 'Neutral';
+
+  @override
+  String get settingsVariantMonochrome => 'Monochrome';
+
+  @override
   String get settingsSelectColor => 'Select color';
+
+  @override
+  String get settingsLaps => 'Number of laps';
+
+  @override
+  String get settingsHalfTime => 'Duration of each half';
+
+  @override
+  String get settingsLocked => 'Cannot be changed while the timer is active';
 
   @override
   String get settingsVolume => 'Voice volume';

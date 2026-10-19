@@ -9,13 +9,23 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class FakeAnnouncer implements Announcer {
   final List<String> spoken = [];
+  final List<Duration> pauses = [];
 
   @override
   Future<void> speak(
     String text, {
     required String languageCode,
     required double volume,
-  }) async => spoken.add(text);
+    Duration pauseBefore = Duration.zero,
+  }) async {
+    spoken.add(text);
+    pauses.add(pauseBefore);
+  }
+
+  int prepared = 0;
+
+  @override
+  Future<void> prepare() async => prepared++;
 
   @override
   Future<void> dispose() async {}
@@ -63,28 +73,39 @@ void main() {
 
     test('announces lap start in Japanese on start', () {
       c.start();
-      expect(announcer.spoken, ['第1ラップです。ゆっくり歩いてください']);
+      expect(announcer.spoken, ['第1ラップです。', '第1ラップです。', 'ゆっくり歩いてください']);
+      expect(announcer.pauses, [
+        Duration.zero,
+        const Duration(milliseconds: 500),
+        const Duration(milliseconds: 500),
+      ]);
     });
 
     test('counts down the last 3 seconds of each half and announces fast', () {
       c.start();
       announcer.spoken.clear();
-      ticks(180);
+      ticks(176);
+      expect(announcer.prepared, 1);
+      ticks(4);
       expect(announcer.spoken, ['3', '2', '1', '早足で歩いてください']);
       expect(c.isFastHalf, isTrue);
       announcer.spoken.clear();
       ticks(180);
       expect(announcer.spoken.sublist(0, 3), ['3', '2', '1']);
       expect(c.lap, 2);
-      expect(announcer.spoken.last, '第2ラップです。ゆっくり歩いてください');
+      expect(announcer.spoken.sublist(announcer.spoken.length - 3), [
+        '第2ラップです。',
+        '第2ラップです。',
+        'ゆっくり歩いてください',
+      ]);
       expect(c.elapsedInLap, 0);
     });
 
     test('finishes after 10 laps and resets', () {
       c.start();
-      ticks(WalkingTimerController.lapSeconds * 10);
+      ticks(c.lapSeconds * 10);
       expect(c.status, TimerStatus.idle);
-      expect(announcer.spoken.last, 'すべてのラップが終了しました。お疲れさまでした');
+      expect(announcer.spoken.last, 'これで終了です。お疲れ様でした。');
       expect(c.lap, 1);
     });
 
@@ -109,6 +130,32 @@ void main() {
       expect(c.elapsedInLap, 0);
     });
 
+    test('follows configured laps and half length', () async {
+      final settings = await makeSettings()
+        ..totalLaps = 2
+        ..halfSeconds = 10;
+      final custom = WalkingTimerController(
+        announcer: announcer,
+        settings: settings,
+        languageCode: () => 'ja',
+      );
+      custom.start();
+      announcer.spoken.clear();
+      for (var i = 0; i < 10; i++) {
+        custom.tick();
+      }
+      expect(announcer.spoken, ['3', '2', '1', '早足で歩いてください']);
+      for (var i = 0; i < 10; i++) {
+        custom.tick();
+      }
+      expect(custom.lap, 2);
+      for (var i = 0; i < 20; i++) {
+        custom.tick();
+      }
+      expect(custom.status, TimerStatus.idle);
+      custom.dispose();
+    });
+
     test('uses English for non-Japanese languages', () async {
       final en = WalkingTimerController(
         announcer: announcer,
@@ -116,7 +163,7 @@ void main() {
         languageCode: () => 'fr',
       );
       en.start();
-      expect(announcer.spoken.single, 'Lap 1. Please walk slowly.');
+      expect(announcer.spoken, ['Lap 1.', 'Lap 1.', 'Please walk slowly.']);
       en.dispose();
     });
   });
@@ -183,6 +230,28 @@ void main() {
       expect(slider.value, lessThan(1.0));
     });
 
+    testWidgets('settings page changes laps and half length', (tester) async {
+      await pumpApp(tester);
+      await tester.tap(find.byIcon(Icons.settings));
+      await tester.pumpAndSettle();
+      expect(find.byKey(const Key('halfValue')), findsOneWidget);
+      expect(find.text('3:00'), findsOneWidget);
+      expect(find.text('10'), findsOneWidget);
+      await tester.drag(
+        find.byKey(const Key('lapsSlider')),
+        const Offset(-2000, 0),
+      );
+      await tester.drag(
+        find.byKey(const Key('halfSlider')),
+        const Offset(-2000, 0),
+      );
+      await tester.pump();
+      expect(find.text('0:10'), findsOneWidget);
+      await tester.tap(find.byType(BackButton));
+      await tester.pumpAndSettle();
+      expect(find.text('1/1'), findsOneWidget);
+    });
+
     testWidgets('color picker only shown for custom scheme', (tester) async {
       await pumpApp(tester);
       await tester.tap(find.byIcon(Icons.settings));
@@ -193,10 +262,18 @@ void main() {
       await tester.tap(find.text('Custom'));
       await tester.pumpAndSettle();
       expect(find.byKey(const Key('seedColorIndicator')), findsOneWidget);
+      expect(find.byKey(const Key('variantSelector')), findsOneWidget);
+      await tester.tap(find.text('Monochrome'));
+      await tester.pumpAndSettle();
+      final selector = tester.widget<SegmentedButton<DynamicSchemeVariant>>(
+        find.byKey(const Key('variantSelector')),
+      );
+      expect(selector.selected, {DynamicSchemeVariant.monochrome});
 
       await tester.tap(find.text('Follow system'));
       await tester.pumpAndSettle();
       expect(find.byKey(const Key('seedColorIndicator')), findsNothing);
+      expect(find.byKey(const Key('variantSelector')), findsNothing);
     });
   });
 }

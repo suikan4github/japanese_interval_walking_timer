@@ -15,10 +15,8 @@ class WalkingTimerController extends ChangeNotifier {
     this.onLapChanged,
   });
 
-  static const int totalLaps = 10;
-  static const int halfSeconds = 180;
-  static const int lapSeconds = halfSeconds * 2;
   static const int countdownSeconds = 3;
+  static const Duration lapAnnouncePause = Duration(milliseconds: 500);
 
   final Announcer announcer;
   final SettingsProvider settings;
@@ -33,17 +31,22 @@ class WalkingTimerController extends ChangeNotifier {
   TimerStatus get status => _status;
   int get lap => _lap;
   int get elapsedInLap => _elapsed;
+  int get totalLaps => settings.totalLaps;
+  int get halfSeconds => settings.halfSeconds;
+  int get lapSeconds => halfSeconds * 2;
   bool get isFastHalf => _elapsed >= halfSeconds;
   double get progress => _elapsed / lapSeconds;
 
   AppLocalizations get _l10n =>
       lookupAppLocalizations(Locale(languageCode() == 'ja' ? 'ja' : 'en'));
 
-  void _say(String text) => announcer.speak(
-    text,
-    languageCode: languageCode(),
-    volume: settings.volume,
-  );
+  void _say(String text, {Duration pauseBefore = Duration.zero}) =>
+      announcer.speak(
+        text,
+        languageCode: languageCode(),
+        volume: settings.volume,
+        pauseBefore: pauseBefore,
+      );
 
   void start() {
     if (_status == TimerStatus.running) return;
@@ -89,6 +92,7 @@ class WalkingTimerController extends ChangeNotifier {
       _say(_l10n.speechFastWalk);
     } else {
       final remaining = halfSeconds - _elapsed % halfSeconds;
+      if (remaining == countdownSeconds + 1) announcer.prepare();
       if (remaining <= countdownSeconds) _say('$remaining');
     }
     notifyListeners();
@@ -96,7 +100,10 @@ class WalkingTimerController extends ChangeNotifier {
 
   void _announceLapStart() {
     onLapChanged?.call(_lap);
-    _say(_l10n.speechLapStart(_lap));
+    final l10n = _l10n;
+    _say(l10n.speechLap(_lap));
+    _say(l10n.speechLap(_lap), pauseBefore: lapAnnouncePause);
+    _say(l10n.speechSlowWalk, pauseBefore: lapAnnouncePause);
   }
 
   void _finish() {

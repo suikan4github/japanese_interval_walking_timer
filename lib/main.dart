@@ -69,7 +69,10 @@ class _MyAppState extends State<MyApp> {
               // Falls back to the custom seed where system colors are unavailable.
               colorScheme: settings.followSystem && lightDynamic != null
                   ? lightDynamic.harmonized()
-                  : ColorScheme.fromSeed(seedColor: settings.seedColor),
+                  : ColorScheme.fromSeed(
+                      seedColor: settings.seedColor,
+                      dynamicSchemeVariant: settings.schemeVariant,
+                    ),
             ),
             localizationsDelegates: const [
               AppLocalizations.delegate,
