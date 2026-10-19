@@ -5,6 +5,7 @@
   "pause": "一時停止",
   "stop": "ストップ",
   "settings": "設定",
+  "about": "バージョン情報",
   "stopConfirmTitle": "タイマーを停止しますか？",
   "stopConfirmMessage": "現在の進捗はクリアされます。",
   "cancel": "キャンセル",

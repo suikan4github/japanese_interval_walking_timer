@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:japanese_interval_walking_timer/l10n/app_localizations.dart';
 import 'package:japanese_interval_walking_timer/screens/settings_screen.dart';
 import 'package:japanese_interval_walking_timer/services/background_service.dart';
@@ -79,18 +80,39 @@ class _HomeScreenState extends State<HomeScreen> {
     final idle = timer.status == TimerStatus.idle;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.appTitle),
-        actions: [
-          IconButton(
-            tooltip: l10n.settings,
-            icon: const Icon(Icons.settings),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const SettingsScreen()),
-            ),
+      appBar: AppBar(title: Text(l10n.appTitle)),
+      drawer: Drawer(
+        child: SafeArea(
+          child: ListView(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.settings),
+                title: Text(l10n.settings),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const SettingsScreen()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.info_outline),
+                title: Text(l10n.about),
+                onTap: () async {
+                  final info = await PackageInfo.fromPlatform();
+                  if (!context.mounted) return;
+                  Navigator.pop(context);
+                  showAboutDialog(
+                    context: context,
+                    applicationName: l10n.appTitle,
+                    applicationVersion: info.version,
+                  );
+                },
+              ),
+            ],
           ),
-        ],
+        ),
       ),
       body: Center(
         child: Column(

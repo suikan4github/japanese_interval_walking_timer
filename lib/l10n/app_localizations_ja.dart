@@ -24,6 +24,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get settings => '設定';
 
   @override
+  String get about => 'バージョン情報';
+
+  @override
   String get stopConfirmTitle => 'タイマーを停止しますか？';
 
   @override

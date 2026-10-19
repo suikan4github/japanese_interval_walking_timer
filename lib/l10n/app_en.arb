@@ -5,6 +5,7 @@
   "pause": "Pause",
   "stop": "Stop",
   "settings": "Settings",
+  "about": "About",
   "stopConfirmTitle": "Stop the timer?",
   "stopConfirmMessage": "The current progress will be cleared.",
   "cancel": "Cancel",

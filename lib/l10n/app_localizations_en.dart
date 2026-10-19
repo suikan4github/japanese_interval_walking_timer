@@ -24,6 +24,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings => 'Settings';
 
   @override
+  String get about => 'About';
+
+  @override
   String get stopConfirmTitle => 'Stop the timer?';
 
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:japanese_interval_walking_timer/main.dart';
 import 'package:japanese_interval_walking_timer/services/announcer.dart';
 import 'package:japanese_interval_walking_timer/services/background_service.dart';
@@ -46,6 +47,13 @@ class FakeBackground implements BackgroundService {
 
 Future<SettingsProvider> makeSettings() async {
   SharedPreferences.setMockInitialValues({});
+  PackageInfo.setMockInitialValues(
+    appName: 'app',
+    packageName: 'app',
+    version: '1.0.0',
+    buildNumber: '1',
+    buildSignature: '',
+  );
   return SettingsProvider(await SharedPreferences.getInstance());
 }
 
@@ -187,6 +195,13 @@ void main() {
       await tester.pumpAndSettle();
     }
 
+    Future<void> openSettings(WidgetTester tester) async {
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Settings'));
+      await tester.pumpAndSettle();
+    }
+
     testWidgets('shows lap, icon and start/pause/stop flow', (tester) async {
       await pumpApp(tester);
       expect(find.text('1/10'), findsOneWidget);
@@ -214,10 +229,18 @@ void main() {
       expect(find.text('1/10'), findsOneWidget);
     });
 
+    testWidgets('drawer shows version info', (tester) async {
+      await pumpApp(tester);
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('About'));
+      await tester.pumpAndSettle();
+      expect(find.text('1.0.0'), findsOneWidget);
+    });
+
     testWidgets('settings page changes volume', (tester) async {
       await pumpApp(tester);
-      await tester.tap(find.byIcon(Icons.settings));
-      await tester.pumpAndSettle();
+      await openSettings(tester);
       expect(find.text('Voice volume'), findsOneWidget);
       await tester.drag(
         find.byKey(const Key('volumeSlider')),
@@ -232,8 +255,7 @@ void main() {
 
     testWidgets('settings page changes laps and half length', (tester) async {
       await pumpApp(tester);
-      await tester.tap(find.byIcon(Icons.settings));
-      await tester.pumpAndSettle();
+      await openSettings(tester);
       expect(find.byKey(const Key('halfValue')), findsOneWidget);
       expect(find.text('3:00'), findsOneWidget);
       expect(find.text('10'), findsOneWidget);
@@ -254,8 +276,7 @@ void main() {
 
     testWidgets('color picker only shown for custom scheme', (tester) async {
       await pumpApp(tester);
-      await tester.tap(find.byIcon(Icons.settings));
-      await tester.pumpAndSettle();
+      await openSettings(tester);
       expect(find.text('Color scheme'), findsOneWidget);
       expect(find.byKey(const Key('seedColorIndicator')), findsNothing);
 
