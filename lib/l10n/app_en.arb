@@ -1,0 +1,43 @@
+{
+  "@@locale": "en",
+  "appTitle": "Interval Walking Timer",
+  "start": "Start",
+  "pause": "Pause",
+  "stop": "Stop",
+  "settings": "Settings",
+  "stopConfirmTitle": "Stop the timer?",
+  "stopConfirmMessage": "The current progress will be cleared.",
+  "cancel": "Cancel",
+  "ok": "OK",
+  "lapProgress": "{lap}/{total}",
+  "@lapProgress": {
+    "placeholders": {
+      "lap": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "speechLapStart": "Lap {lap}. Please walk slowly.",
+  "@speechLapStart": {
+    "placeholders": {
+      "lap": {"type": "int"}
+    }
+  },
+  "speechFastWalk": "Please walk briskly.",
+  "speechFinished": "All laps are complete. Well done.",
+  "settingsColorScheme": "Color scheme",
+  "settingsSchemeSystem": "Follow system",
+  "settingsSchemeCustom": "Custom",
+  "settingsSeedColor": "Theme color",
+  "settingsSelectColor": "Select color",
+  "settingsVolume": "Voice volume",
+  "walkingSlow": "Walking slowly",
+  "walkingFast": "Walking briskly",
+  "notificationTitle": "Interval walking in progress",
+  "notificationText": "Lap {lap}/{total}",
+  "@notificationText": {
+    "placeholders": {
+      "lap": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  }
+}
