@@ -66,3 +66,19 @@ flutter test
   `android/app/build.gradle.kts` to meet the plugins' requirements.
 - Foreground audio ducking and background behavior depend on the device and on
   the other app; verify them on a real device.
+
+
+## Screenshots
+![Screenshot](images/Screenshot_20261029-073412.png)
+*Screenshot*
+
+
+![icon](images/foreground.drawio.png)
+*Icon*
+
+## License
+
+![Screenshot](images/
+This project is licensed under the MIT License.
+
+See the [LICENSE](LICENSE) file for details.

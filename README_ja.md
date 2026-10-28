@@ -65,3 +65,18 @@ flutter test
   `android/app/build.gradle.kts` で設定しています。
 - 他アプリの音量低下やバックグラウンド動作は、端末や相手アプリによって異なります。
   実機で確認してください。
+
+## スクリーンショット
+![Screenshot](images/Screenshot_20261029-073412.png)
+*スクリーンショット*
+
+
+![icon](images/foreground.drawio.png)
+*アイコン*
+
+## ライセンス
+
+![Screenshot](images/Screenshot_20261029-073412.png)
+このプロジェクトは MIT ライセンスの下で公開されています。
+
+詳細は [LICENSE](LICENSE) ファイルを参照してください。
