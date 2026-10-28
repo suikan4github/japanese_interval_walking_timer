@@ -46,6 +46,12 @@ dependencies:
   dynamic_color: 1.8.1
   package_info_plus: ^9.0.1
 
+  # Flutter launcher icons package for generating app icons automatically.
+  # See https://pub.dev/packages/flutter_launcher_icons for more information.
+  flutter_launcher_icons: ^0.14.4
+
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -99,3 +105,11 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+flutter_launcher_icons:
+  android: true
+  image_path: "assets/icon/foreground.drawio.png"
+  adaptive_icon_foreground: "assets/icon/foreground.drawio.png"
+  adaptive_icon_background: "assets/icon/background.drawio.png"
+  adaptive_icon_monochrome: "assets/icon/monochrome.drawio.png"
+
