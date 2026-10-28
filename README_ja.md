@@ -76,7 +76,7 @@ flutter test
 
 ## ライセンス
 
-![Screenshot](images/Screenshot_20261029-073412.png)
+
 このプロジェクトは MIT ライセンスの下で公開されています。
 
 詳細は [LICENSE](LICENSE) ファイルを参照してください。
