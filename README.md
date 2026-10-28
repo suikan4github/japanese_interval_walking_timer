@@ -24,6 +24,8 @@ and brisk walking. It shows the state on screen and announces it by voice.
 - While speaking, other apps' audio is lowered (ducked) and resumes afterwards.
 - Japanese and English UI and voice. Japanese is used when the Android language
   is Japanese, English otherwise.
+- The Android app name is localized as "インターバル速歩" in Japanese and
+  "Japanese Walking" otherwise.
 
 ## Settings
 
@@ -64,4 +66,3 @@ flutter test
   `android/app/build.gradle.kts` to meet the plugins' requirements.
 - Foreground audio ducking and background behavior depend on the device and on
   the other app; verify them on a real device.
-
