@@ -1,4 +1,4 @@
-# 日本語インターバル速歩タイマー
+# インターバル速歩タイマー
 
 [English](README.md)
 
@@ -71,7 +71,7 @@ flutter test
 *スクリーンショット*
 
 
-![icon](images/foreground.drawio.png)
+![icon](images/foreground.drawio.png)<br>
 *アイコン*
 
 ## ライセンス
