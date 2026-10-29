@@ -71,7 +71,7 @@ flutter test
 *スクリーンショット*
 
 
-![icon](images/foreground.drawio.png)
+![icon](images/foreground.drawio.png)<br>
 *アイコン*
 
 ## ライセンス

@@ -69,11 +69,11 @@ flutter test
 
 
 ## Screenshots
-![Screenshot](images/Screenshot_20261029-073412.png)
+![Screenshot](images/Screenshot_20261029-110713.png)
 *Screenshot*
 
 
-![icon](images/foreground.drawio.png)
+![icon](images/foreground.drawio.png)<br>
 *Icon*
 
 ## License
