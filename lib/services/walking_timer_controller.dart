@@ -89,7 +89,7 @@ class WalkingTimerController extends ChangeNotifier {
       _elapsed = 0;
       _announceLapStart();
     } else if (_elapsed == halfSeconds) {
-      _say(_l10n.speechFastWalk);
+      _say(_l10n.speechLapSecondHalf(_lap));
     } else {
       final remaining = halfSeconds - _elapsed % halfSeconds;
       if (remaining == countdownSeconds + 1) announcer.prepare();

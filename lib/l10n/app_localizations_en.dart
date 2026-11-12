@@ -49,6 +49,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String speechLapSecondHalf(Object lap) {
+    return 'Second half of lap $lap. Please walk briskly.';
+  }
+
+  @override
   String get speechSlowWalk => 'Please walk slowly.';
 
   @override

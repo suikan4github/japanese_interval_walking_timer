@@ -89,13 +89,13 @@ void main() {
       ]);
     });
 
-    test('counts down the last 3 seconds of each half and announces fast', () {
+    test('counts down each half and announces the lap at halfway', () {
       c.start();
       announcer.spoken.clear();
       ticks(176);
       expect(announcer.prepared, 1);
       ticks(4);
-      expect(announcer.spoken, ['3', '2', '1', '早足で歩いてください']);
+      expect(announcer.spoken, ['3', '2', '1', '第1ラップ後半です。早足で歩いてください。']);
       expect(c.isFastHalf, isTrue);
       announcer.spoken.clear();
       ticks(180);
@@ -107,6 +107,50 @@ void main() {
         'ゆっくり歩いてください',
       ]);
       expect(c.elapsedInLap, 0);
+    });
+
+    test('announces the lap second half in Japanese', () async {
+      final settings = await makeSettings()
+        ..halfSeconds = 10;
+      final halfwayAnnouncer = FakeAnnouncer();
+      final halfway = WalkingTimerController(
+        announcer: halfwayAnnouncer,
+        settings: settings,
+        languageCode: () => 'ja',
+      );
+      halfway.start();
+
+      for (var i = 0; i < halfway.halfSeconds - 1; i++) {
+        halfway.tick();
+      }
+      halfwayAnnouncer.spoken.clear();
+      halfway.tick();
+
+      expect(halfwayAnnouncer.spoken, ['第1ラップ後半です。早足で歩いてください。']);
+      halfway.dispose();
+    });
+
+    test('announces the lap second half in English', () async {
+      final settings = await makeSettings()
+        ..halfSeconds = 10;
+      final halfwayAnnouncer = FakeAnnouncer();
+      final halfway = WalkingTimerController(
+        announcer: halfwayAnnouncer,
+        settings: settings,
+        languageCode: () => 'en',
+      );
+      halfway.start();
+
+      for (var i = 0; i < halfway.halfSeconds - 1; i++) {
+        halfway.tick();
+      }
+      halfwayAnnouncer.spoken.clear();
+      halfway.tick();
+
+      expect(halfwayAnnouncer.spoken, [
+        'Second half of lap 1. Please walk briskly.',
+      ]);
+      halfway.dispose();
     });
 
     test('finishes after 10 laps and resets', () {
@@ -152,7 +196,7 @@ void main() {
       for (var i = 0; i < 10; i++) {
         custom.tick();
       }
-      expect(announcer.spoken, ['3', '2', '1', '早足で歩いてください']);
+      expect(announcer.spoken, ['3', '2', '1', '第1ラップ後半です。早足で歩いてください。']);
       for (var i = 0; i < 10; i++) {
         custom.tick();
       }
