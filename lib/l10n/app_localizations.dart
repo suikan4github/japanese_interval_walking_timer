@@ -170,6 +170,12 @@ abstract class AppLocalizations {
   /// **'Lap {lap}.'**
   String speechLap(int lap);
 
+  /// No description provided for @speechLapSecondHalf.
+  ///
+  /// In en, this message translates to:
+  /// **'Second half of lap {lap}. Please walk briskly.'**
+  String speechLapSecondHalf(Object lap);
+
   /// No description provided for @speechSlowWalk.
   ///
   /// In en, this message translates to:

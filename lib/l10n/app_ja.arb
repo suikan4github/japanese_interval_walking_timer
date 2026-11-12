@@ -12,6 +12,7 @@
   "ok": "OK",
   "lapProgress": "{lap}/{total}",
   "speechLap": "第{lap}ラップです。",
+  "speechLapSecondHalf": "第{lap}ラップ後半です。早足で歩いてください。",
   "speechSlowWalk": "ゆっくり歩いてください",
   "speechFastWalk": "早足で歩いてください",
   "speechFinished": "これで終了です。お疲れ様でした。",

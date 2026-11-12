@@ -18,6 +18,7 @@
     }
   },
   "speechLap": "Lap {lap}.",
+  "speechLapSecondHalf": "Second half of lap {lap}. Please walk briskly.",
   "speechSlowWalk": "Please walk slowly.",
   "@speechLap": {
     "placeholders": {

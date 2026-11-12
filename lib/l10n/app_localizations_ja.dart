@@ -49,6 +49,11 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String speechLapSecondHalf(Object lap) {
+    return '第$lapラップ後半です。早足で歩いてください。';
+  }
+
+  @override
   String get speechSlowWalk => 'ゆっくり歩いてください';
 
   @override
