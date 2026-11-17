@@ -227,7 +227,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsVariantFidelity.
   ///
   /// In en, this message translates to:
-  /// **'Vivid'**
+  /// **'Fidelity'**
   String get settingsVariantFidelity;
 
   /// No description provided for @settingsVariantTonal.

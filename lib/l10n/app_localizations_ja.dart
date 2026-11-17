@@ -78,7 +78,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get settingsColorVariant => 'カラーバリエーション';
 
   @override
-  String get settingsVariantFidelity => '充実';
+  String get settingsVariantFidelity => '忠実';
 
   @override
   String get settingsVariantTonal => 'トーン';

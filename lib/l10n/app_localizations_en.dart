@@ -78,7 +78,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsColorVariant => 'Color variation';
 
   @override
-  String get settingsVariantFidelity => 'Vivid';
+  String get settingsVariantFidelity => 'Fidelity';
 
   @override
   String get settingsVariantTonal => 'Tonal';
